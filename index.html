@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"/>
+    <link rel="stylesheet" href="styles.css"/>
+
+</head>
+<body>
+<main>
+    <div class="container counter">
+        <div class="counter">
+            <span>Tries left:</span>
+            <span id="counter"></span>
+        </div>
+    </div>
+    <div class="container">
+        <div>
+            <h1>Guess the Word</h1>
+        </div>
+        <div id='definition'></div>
+        <button type="button" id="startButton">Start</button>
+        <div id="letters"></div>
+    </div>
+    <div class="container">
+        <div id="interactive">
+            <div>
+                <label id="tryLabel">
+                    Type your letter here
+                    <input type="text" id="userLetter"/>
+                </label>
+
+                <button type="button" id="try">Try letter</button>
+                <button type="button" id="newGame">New game</button>
+            </div>
+        </div>
+    </div>
+
+</main>
+<script src="js/main.js"></script>
+
+</body>
+
+</html>
