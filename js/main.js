@@ -35,6 +35,7 @@ const chooseTheWord = () => {
     const currentWord = words[Math.floor(Math.random() * words.length)]
     return currentWord
 }
+let currentWord = ''
 
 const showLetterBlocks = (currentWord) => {
 
@@ -70,6 +71,7 @@ const setCounter = (value) => {
     counter = value
     counterBlock.innerHTML = `${counter.toString()}`
 }
+
 const checkLetter = (currentWord, letter) => {
     if (counter === 0) {
         alert(`You run out of tries. Start new game. The correct word was "${currentWord}"`)
@@ -101,15 +103,18 @@ const showHideGameElements = () => {
     counterContainer.classList.remove('hidden')
 }
 
+const handleCheckLetter = () => {
+    checkLetter(currentWord.word, userLetter.value)
+}
+
 const startGame = () => {
     showHideGameElements()
-    const currentWord = chooseTheWord()
+    currentWord = chooseTheWord()
     setCounter(currentWord.word.length - 2)
     showLetterBlocks(currentWord.word)
     showDefinition(currentWord.definition)
 
-    tryLetterButton.addEventListener('click', () => checkLetter(currentWord.word, userLetter.value))
-
+    tryLetterButton.addEventListener('click', handleCheckLetter)
 }
 
 const prepareGame = () => {
@@ -121,14 +126,15 @@ const prepareGame = () => {
 
 document.addEventListener('DOMContentLoaded', prepareGame);
 
-const removeListeners = ()=> {
+const removeListeners = ()=>{
     document.removeEventListener('DOMContentLoaded', prepareGame);
-    tryLetterButton.removeEventListener('click', () => checkLetter('', userLetter.value))
     userLetter.removeEventListener('keypress', onKeyPress)
+    tryLetterButton.removeEventListener('click', handleCheckLetter)
+    currentWord = ''
     startButton.removeEventListener('click', startGame)
     newGameButton.removeEventListener('click', startGame)
     return;
 }
-window.onbeforeunload(removeListeners)
+window.onbeforeunload = removeListeners
 
 
